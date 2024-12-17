@@ -1,0 +1,33 @@
+<header id="ulogo1" class="shead2 stit0">
+    <div class="header-m blur">
+        <div class="flex_r m-lr-20"><a class="flex_r " href="/">
+                <div class="center"><img class="header-lg center" src="/picture/logos.png" alt="logo of website"></div>
+                <div class="center">
+                    <h1 class="font-lg m-lr-5 cor_ora">SA Coder</h1>
+                </div>
+            </a></div>
+        <div class="center">
+            <div class="center">
+                <?php if ($flag == 1) {
+                    echo '<img id="usernav1" class="header-up center pointer" src="/admin/profilepic.php?v=' . filemtime('C:/xampp/htdocs/accounts/' . $_SESSION['plink']) . '" alt="DP of user">';
+                } else {
+                    echo '<a href="/accounts/?redirect=' . $_SERVER['REQUEST_URI'] . '"><img id="usernav1" class="header-up center pointer" src="/picture/sign_in.webp" alt="sign in"></a>';
+                } ?>
+            </div>
+        </div>
+    </div> <?php if ($flag == 1) { ?>
+        <nav id="usernavli1" class="usernav">
+            <ul class="usernavul blur">
+                <li class="usernavli userd"><?php echo $_SESSION['username']; ?></li>
+                <li class="usernavli userd"><?php echo $_SESSION['email']; ?></li>
+                <li class="usernavli "><a class="z_top posck" href="/accounts/profile">Profile</a></li>
+                <li class="usernavli ">
+                    <div onclick="tcolor('show','2')" class="z_top posck pointer themes">Themes</div>
+                </li>
+                <li class="usernavli"><a class="z_top posck"
+                        href="/logout?redirect=<?php echo $_SERVER['REQUEST_URI']; ?>">Logout</a></li>
+            </ul>
+            <div class="ifect ifect10"></div>
+        </nav>
+        <nav id="them2" class="usernav"></nav><?php } ?>
+</header>

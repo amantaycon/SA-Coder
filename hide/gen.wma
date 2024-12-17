@@ -1,0 +1,34 @@
+<?php function namegen($pass1)
+{
+    $skey = 84;
+    $GLOBALS['pass2'] = 64;
+    $GLOBALS['fpass2'] = 4;
+    for ($i = strlen($pass1) - 2; $i > 0; $i--) {
+        srand(ord($pass1[$i]) * $skey * $i);
+        $GLOBALS['pass2'] = ~$GLOBALS['pass2'];
+        $GLOBALS['pass2'] += rand() * $i;
+        $GLOBALS['pass2'] <<= (ord($pass1[$i]) % 5);
+        $GLOBALS['pass2'] = ~$GLOBALS['pass2'];
+        $GLOBALS['pass2'] ^= (~rand() * 867);
+        $GLOBALS['pass2'] >>= (ord($pass1[$i]) % 5);
+        $GLOBALS['pass2'] = ~$GLOBALS['pass2'];
+        $GLOBALS['pass2'] ^= (~ord($pass1[$i]) * rand());
+    }
+    srand($GLOBALS['pass2'] % 584848);
+    for ($i = 1; $i < 5; $i++, $GLOBALS['pass2'] += ((((rand() * 16) * $skey) * 54) * $i))
+        ;
+    for ($i = strlen($pass1) - 2; $i > 0; $i--) {
+        srand(ord($pass1[$i]) * ($GLOBALS['pass2'] % $skey) * $i);
+        $GLOBALS['fpass2'] = ~$GLOBALS['fpass2'];
+        $GLOBALS['fpass2'] += rand() * 56 * rand() * $i;
+        $GLOBALS['fpass2'] <<= (ord($pass1[$i]) % 9);
+        $GLOBALS['fpass2'] = ~$GLOBALS['fpass2'];
+        $GLOBALS['fpass2'] ^= (~rand() * 8);
+        $GLOBALS['fpass2'] >>= (ord($pass1[$i]) % 8);
+        $GLOBALS['fpass2'] += $GLOBALS['pass2'];
+        $GLOBALS['fpass2'] ^= (~ord($pass1[$i]) * rand());
+    }
+    srand($GLOBALS['fpass2'] % 264864);
+    for ($i = 1; $i < 5; $i++, $GLOBALS['fpass2'] += ((((rand() * 95) * $skey) * 48) * $i))
+        ;
+} ?>

@@ -1,0 +1,9 @@
+<?php $mainserver = 'localhost';
+$mainusername = 'code';
+$mainpass = '12345678';
+$mainname = 'sacoder';
+$connsad = mysqli_connect($mainserver, $mainusername, $mainpass, $mainname);
+if ($connsad == false) {
+    dir('Error: Cannot connect');
+    echo 'database connection error';
+} ?>

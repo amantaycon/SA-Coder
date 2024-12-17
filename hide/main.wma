@@ -1,0 +1,13 @@
+<?php
+    require_once(path."verifycookies.wma");
+    $admin = 0;
+    if ($flag == 1) {
+        if($_SESSION['email'] == "sacoder3@gmail.com"){
+            $admin = 1;
+        }
+    }
+    //if ($admin != 1) {
+    //    header("location: /503");
+    //    exit;
+    //}
+?>

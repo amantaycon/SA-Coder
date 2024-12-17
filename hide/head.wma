@@ -1,0 +1,30 @@
+<?php require_once(path . "hide/config.wma"); ?>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Aman Taycon">
+<meta name="robots" content="INDEX, FOLLOW">
+<link rel="shortcut icon" href="/picture/favicon.ico" type="image/x-icon">
+<?php if ($flag == 1 && isset($_SESSION['themes'])) {
+  if (isset($_SESSION['themeslink'])) {
+    echo '<link rel="stylesheet" href="' . $_SESSION['themeslink'] . '?v=' . filemtime(path . $_SESSION['themeslink']) . '">';
+  } else {
+    $tid = $_SESSION['themes'];
+    $sqlc = "SELECT `themes` FROM `tcolor` WHERE `id` = '$tid';";
+    $rt = mysqli_query($connsad, $sqlc);
+    if (mysqli_num_rows($rt) == 1) {
+      $rowrt = mysqli_fetch_assoc($rt);
+      $_SESSION['themeslink'] = $rowrt['themes'];
+      echo '<link rel="stylesheet" href="' . $_SESSION['themeslink'] . '?v=' . filemtime(path . $_SESSION['themeslink']) . '">';
+    } else {
+      echo '<link rel="stylesheet" href="/css/defaulthemes.css">';
+    }
+  }
+} else {
+  if (isset($_SESSION['themeslink'])) {
+    echo '<link rel="stylesheet" href="' . $_SESSION['themeslink'] . '?v=' . filemtime(path . $_SESSION['themeslink']) . '">';
+  } else {
+    echo '<link rel="stylesheet" href="/css/defaulthemes.css">';
+  }
+} ?>
+<link rel="stylesheet" href="/css/main.css">

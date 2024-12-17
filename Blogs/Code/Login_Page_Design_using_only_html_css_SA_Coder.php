@@ -1,0 +1,1 @@
+<?php $pagedata=""; $meta=""; $navsidedata=""; $navdata=""; $nexpre=""; define('path', 'C:/xampp/htdocs/'); $navid=4; $tpage=71772408; $tcomt=30548186; require_once(path."hide/main.wma"); require_once(path."hide/config.wma"); include("maindata.wma"); include("compage.wma"); ?>
