@@ -1,0 +1,13 @@
+<?php require_once(path . "verifycookies.wma");
+$admin = 0;
+if ($flag == 1) {
+    if ($_SESSION['email'] == "sacoder3@gmail.com") {
+        $admin = 1;
+    } else {
+        echo '<center><h3>Currently this site is closed due to maintenance and some reasons, it will be fixed by March 6 sorry for the inconvenience.</h3></center>';
+        exit;
+    }
+} else {
+    echo '<center><h3>Currently this site is closed due to maintenance and some reasons, it will be fixed by March 6 sorry for the inconvenience.</h3></center>';
+    exit;
+} ?>

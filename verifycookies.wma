@@ -1,0 +1,88 @@
+<?php
+    $flag = 2;
+    if (session_status() == PHP_SESSION_NONE) {
+    if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+}
+    if(isset($_SESSION['server_username']))
+    {
+        if($_SESSION['server_username'] == "yes"){
+            $flag = 1;
+        }
+        else{
+            $flag = 0;
+        }
+    }
+    elseif(isset($_COOKIE['server_username'])){
+        if($_COOKIE['server_username'] == "yes"){
+            require_once path."accounts/config.wma";
+            $id = $_COOKIE['con1'];
+            $cookies = $_COOKIE['con2'];
+            $privacy_data = $_COOKIE['con3'];
+            $more = $_COOKIE['con4'];
+            $sql = "SELECT * FROM `root_users` WHERE `id` = '$id';";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) == 1) {
+                $row = mysqli_fetch_assoc($result);
+                
+                if($row["id"] == $id && $row["cookies"] == $cookies && $row["privacy_data"] == $privacy_data && $row["more"] == $more){
+                    // all session and cookies destroy
+                    $_SESSION = array();
+                    session_destroy();
+                    sleep(1);
+                    // all session and cookies set
+                    if (session_status() == PHP_SESSION_NONE) {
+    if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+}
+                    $_SESSION['id'] = $row["id"];
+                    $_SESSION['username'] = $row["username"];
+                    $_SESSION['email'] = $row["email"];
+                    $_SESSION['server_username'] = "yes";
+                    $_SESSION['first'] = $row["first"];
+                    $_SESSION['last'] = $row["last"];
+                    $_SESSION['plink'] = $row["p_link"];
+                    $_SESSION['themes'] = $row["themes"];
+                    $_SESSION['premium'] = $row["premium"];
+                    
+                    setcookie("con1", $row["id"], time() + 2500000, "/", "sacoder.com", true, true);
+                    setcookie("con2", $row["cookies"], time() + 2500000, "/", "sacoder.com", true, true);
+                    setcookie("con3", $row["privacy_data"], time() + 2500000, "/", "sacoder.com", true, true);
+                    setcookie("con4", $row["more"], time() + 2500000, "/", "sacoder.com", true, true);
+                    setcookie('server_username', 'yes', time() + 2500000, "/", "sacoder.com", true, true);
+                    mysqli_close($conn);
+                    $flag = 1;
+                }
+                else{
+                    $flag = 0;
+                }
+            } else{
+                $flag = 0;
+            }
+        }
+        else{
+            $flag = 0;
+        }
+    }
+    else{
+        $flag = 5;
+        if(isset($_SESSION['server_username'])){
+            $flag = 0;
+        }
+    }
+    if($flag == 0){
+            $_SESSION = array();
+            session_destroy();
+            setcookie("con1", "", time() - 2500, "/", "sacoder.com", true, true);
+            setcookie("con2", "", time() - 2500, "/", "sacoder.com", true, true);
+            setcookie("con3", "", time() - 2500, "/", "sacoder.com", true, true);
+            setcookie("con4", "", time() - 2500, "/", "sacoder.com", true, true);
+            setcookie('server_username', "no", time() - 2500, "/", "sacoder.com", true, true);
+            if (session_status() == PHP_SESSION_NONE) {
+    if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+}
+    }
