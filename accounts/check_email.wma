@@ -1,0 +1,34 @@
+<?php
+    $otpvalid = true;
+    require_once "config.wma";
+    $sql = "SELECT `dates` FROM `validemail` WHERE `email` = '$email';";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $dates = $row['dates'];
+        $timestamp1 = strtotime($dates);
+        $timestamp2 = strtotime(date('Y-m-d H:i:s'));
+        if((($timestamp2 - $timestamp1)/3600) < 24){
+            $otpvalid = false;
+            $err = "OTP has been sent too many times. please try after 24 hours.";
+        }
+        else{
+            $otpvalid = true;
+            $sql = "DELETE FROM `validemail` WHERE `email` = '$email';";
+            mysqli_query($conn, $sql);
+        }
+    }
+    else{
+        $otpvalid = true;
+        if(!isset($_SESSION['otpvalid'])){
+            $_SESSION['otpvalid'] = 1;
+        }
+        else{
+            $_SESSION['otpvalid']++;
+        }
+        if($_SESSION['otpvalid'] > 4){
+            $sql = "INSERT INTO `validemail`(`email`) VALUES ('$email');";
+            mysqli_query($conn, $sql);
+            $otpvalid = true;
+        }
+    }

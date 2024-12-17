@@ -1,0 +1,1 @@
+function submit() { var e = document.getElementById("username"); $.post("userupdatedata", { username: e.value }, function (e, n) { "" != e && alert(e), location.reload() }) }
