@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <?php require_once(path . "hide/head.wma");
+    $_SESSION['composi'] = 1;
+    $_SESSION['stop'] = 0;
+    if (isset($_SESSION['live'])) {
+        unset($_SESSION['live']);
+    } ?>
+    <link rel="stylesheet" href="/css/list.css?v=<?php echo filemtime(path . '/css/list.css'); ?>">
+    <link rel="stylesheet" href="/css/comment.css?v=<?php echo filemtime(path . '/css/comment.css'); ?>">
+    <link rel="stylesheet" href="/css/responsivenase.css?v=<?php echo filemtime(path . '/css/responsivenase.css'); ?>">
+    <?php echo $meta; ?>
+</head>
+
+<body id="body" class="ifect_page"><?php require_once(path . "hide/header.wma"); ?>
+    <div class="stit3 pagelist shead2">
+        <div class="blur center">
+            <div id="navpag" class="blur pointer"><svg viewBox="0 0 24 24"
+                    style=" width: 1.7rem; height: 1.7rem;margin: 3px 15px; float: left;">
+                    <path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"
+                        style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: var(--orange); fill-rule: nonzero; opacity: 1;"
+                        transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                </svg></div><a href="/"><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24"
+                    viewBox="0 0 256 256" xml:space="preserve">
+                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+                        transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                        <polygon
+                            points="75.96,30.96 75.96,13.34 67.26,13.34 67.26,22.26 45,0 0.99,44.02 7.13,50.15 45,12.28 82.88,50.15 89.01,44.02 "
+                            style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: var(--orange); fill-rule: nonzero; opacity: 1;"
+                            transform="  matrix(1 0 0 1 0 0) "></polygon>
+                        <polygon
+                            points="45,20 14.04,50.95 14.04,90 35.29,90 35.29,63.14 54.71,63.14 54.71,90 75.96,90 75.96,50.95 "
+                            style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: var(--orange); fill-rule: nonzero; opacity: 1;"
+                            transform="  matrix(1 0 0 1 0 0) "></polygon>
+                    </g>
+                </svg></a><?php echo $navdata; ?>
+        </div>
+        <nav id="navpagnav" class="navpage stit3 blur shead2 ovscrox"><?php echo $navsidedata; ?></nav>
+    </div>
+    <main>
+        <div class="ifectp ifect14"></div>
+        <div class="ifectp ifect15"></div>
+        <div class="ifectp ifect16"></div>
+        <div class="ifectp ifect17"></div>
+        <div class="ifectp ifect18"></div>
+        <div class="ifectp ifect19"></div>
+        <div id="main">
+            <div id="pagedata" class="macon"><?php echo $nexpre . $pagedata . $nexpre; ?><?php if ($admin != 1) { ?><ins
+                        class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                        data-ad-format="fluid" data-ad-client="ca-pub-8603322221866927" data-ad-slot="9773081458"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script><?php } ?>
+            </div>
+            <div class="comdiv">
+                <div class="center"><?php if ($flag == 1) { ?> <input id="comment" name="comment" type="text"
+                            placeholder="Add a comment..." required><button class="pointer" id="submit" type="button"><svg
+                                style=" width: 2rem; height: 2rem;" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" style="fill: var(--orange);"></path>
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                            </svg></button> <?php } else { ?>
+                        <div id="comblock" class="cor_blap">Please <a class="cor_ora"
+                                href="/accounts/?redirect=https://t.sacoder.com<?php echo $_SERVER['REQUEST_URI']; ?>">login</a>
+                            first to comment.</div> <?php } ?>
+                </div>
+                <div class="center">
+                    <div id="comment_box" class=" codeh ovscrox"></div>
+                </div>
+            </div><?php if ($admin != 1) { ?><ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed"
+                    data-ad-client="ca-pub-8603322221866927" data-ad-slot="4128204237"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script><?php } ?>
+        </div>
+    </main>
+    <footer id="ftdata"></footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>document.getElementById("ulogo1").style.top = "-5rem"; dataf(); function dataf() { $.post("/data/getdata", { data: "2" }, function (data, status) { if (data != "") { document.getElementById("ftdata").innerHTML = data; } }); }</script>
+    <script src="/js/receiver.js"></script>
+    <script src="/js/copy.js"></script>
+    <script><?php if ($flag == 1) {
+        echo 'const form=document.getElementById("submit");form.onclick=function(e){e.preventDefault();let t=document.getElementById("comment");$.post("/admin/commentpost",{inputcom:t.value,data:' . $tcomt . '}),t.value=""};var input=document.getElementById("comment");input.addEventListener("keyup",function(e){e.preventDefault(),13===e.keyCode&&document.getElementById("submit").click()});';
+    }
+    echo 'comment();var scroly=document.getElementById("comment_box");let scrollTimeout;function comment(){$.post("/admin/commentget",{data:' . $tcomt . '},function(o,c){""!=o&&(scroly.innerHTML+=o)})}scroly.addEventListener("scroll",function(){if(scrollTimeout) clearTimeout(scrollTimeout);scrollTimeout = setTimeout(function(){if((scroly.scrollHeight-350) < (scroly.scrollTop)){comment();}},50);});setInterval(ct, 1000);function ct(){$.post("/admin/liveget",{ data:' . $tcomt . '},function (o, c){"" != o&&($("#comment_box").prepend(o))})}'; ?></script>
+    <script src="/js/themes.js"></script>
+    <script src="/js/c-syntax.js"></script>
+</body>
+
+</html>
